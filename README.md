@@ -9,7 +9,7 @@ cek versi menggunakan
 python --version
 ```
 
-##atau anda bisa menggunakan venv (Virtual Environment)
+##atau anda bisa menggunakan venv (Virtual Environment), anda bisa melewati tahap ini jika tidak menggunakan venv
 
 jika saat anda menginstall python dan sudah menyentang Path
 1. cari di folder 
