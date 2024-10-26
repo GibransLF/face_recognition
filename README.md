@@ -35,7 +35,7 @@ python38 -m venv venv38
 
 untuk masuk menggunakan venv
 ```
-.\venv313\Scripts\activate
+.\venv38\Scripts\activate
 ```
 untuk menghentikan
 ```
