@@ -9,7 +9,7 @@ cek versi menggunakan
 python --version
 ```
 
-##atau anda bisa menggunakan venv (Virtual Environment), anda bisa melewati tahap ini jika tidak menggunakan venv
+## atau anda bisa menggunakan venv (Virtual Environment), anda bisa melewati tahap ini jika tidak menggunakan venv
 
 jika saat anda menginstall python dan sudah menyentang Path
 1. cari di folder 
@@ -71,3 +71,6 @@ jalankan di terminal
 python main.py
 ```
 Selesai
+
+## jika terjadi error
+kemungkinan anda tidak menginstal "cmake", silahkan install terlebih dahulu (baca pesan error)
