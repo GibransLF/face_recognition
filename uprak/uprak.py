@@ -4,20 +4,20 @@ import face_recognition
 import numpy as np
 from datetime import datetime
 
-mycursor.execute("SELECT * FROM user")
-users = mycursor.fetchall()
+mycursor.execute("SELECT * FROM mhs")
+mahasiswas = mycursor.fetchall()
 
-user_data = []
+mhs_data = []
 
 encodings = []
 
-for user in users:
-    path_gambar = '../' +user[4]
+for mhs in mahasiswas:
+    path_gambar = '../' +mhs[5]
     
     image = face_recognition.load_image_file(path_gambar)
     encoding = face_recognition.face_encodings(image)[0]
     
-    user_data.append({'nama': user[1], 'lahir': user[2], 'jk': user[3], 'img': user[4]})
+    mhs_data.append({'nama_mhs': mhs[1], 'tahun_lahir': mhs[2], 'fakultas': mhs[3], 'jurusan': mhs[4]})
     encodings.append(encoding)
 
 # Inisialisasi webcam
@@ -48,18 +48,21 @@ while True:
         if any(matches):
             best_match_index = np.argmin(face_distances)
             
-            name = user_data[best_match_index]['nama']
+            name = mhs_data[best_match_index]['nama_mhs']
             current_year = datetime.now().year
-            age = current_year - user_data[best_match_index]['lahir']
-            gender = user_data[best_match_index]['jk']
+            age = current_year - mhs_data[best_match_index]['tahun_lahir']
+            fakultas = mhs_data[best_match_index]['fakultas']
+            jurusan = mhs_data[best_match_index]['jurusan']
             frame_color = (0, 255, 0)
 
         # Gambar kotak di sekitar wajah
         cv2.rectangle(frame, (left, top), (right, bottom), (frame_color), 2)
 
-        # Tambahkan label nama dan umur
-        label = f"{name}, {age}, {gender}"
-        cv2.putText(frame, label, (left, bottom + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
+        # Tambahkaan Label
+        cv2.putText(frame, fakultas, (left, top - 30), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
+        cv2.putText(frame, jurusan, (left, top - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
+        labelBottom = f"{name}, {age} Tahun"
+        cv2.putText(frame, labelBottom, (left, bottom + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
 
     # Tampilkan hasil
     cv2.imshow('Video', frame)
