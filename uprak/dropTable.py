@@ -1,4 +1,4 @@
 from koneksi import *
 
-mycursor.execute("DROP TABLE user")
-print ("table user berhasil dihapus")
+mycursor.execute("DROP TABLE mhs")
+print ("table mhs berhasil dihapus")
