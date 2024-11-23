@@ -1,29 +1,30 @@
 from koneksi import *
 
-mycursor.execute("SHOW TABLES LIKE 'user'")
-user = mycursor.fetchone()
+mycursor.execute("SHOW TABLES LIKE 'mhs'")
+mhs = mycursor.fetchone()
 
-if not user:
+if not mhs:
     mycursor.execute("""
-        CREATE TABLE user(
-            id integer AUTO_INCREMENT PRIMARY KEY,
-            username VARCHAR(255),
-            lahir integer(8),
-            jk VARCHAR(255),
-            img VARCHAR(255)
+        CREATE TABLE mhs(
+            id_mhs integer AUTO_INCREMENT PRIMARY KEY,
+            nama_mhs VARCHAR(255),
+            tahun_lahir integer(8),
+            fakultas VARCHAR(255),
+            jurusan VARCHAR(255),
+            foto VARCHAR(255)
         )
     """)
-    print ("table user berhasil dibuat")
+    print ("table mhs berhasil dibuat")
     
     mycursor.execute("""
-        INSERT INTO user
-            (username, lahir, jk, img) VALUES
-                ('Ananta', '2003', 'laki-laki', 'ananta.jpeg'),
-                ('Daryat', '1999', 'laki-laki', 'daryat.jpeg'),
-                ('Uzi', '2000', 'laki-laki', 'uzi.jpeg')
+        INSERT INTO mhs
+            (nama_mhs, tahun_lahir, fakultas, jurusan, foto) VALUES
+                ('Ananta', '2003', 'Fakultas Ilmu Komputer', 'Sistem Informasi', 'ananta.jpeg'),
+                ('Daryat', '1999', 'Fakultas Ilmu Komputer', 'Teknik Informatika', 'daryat.jpeg'),
+                ('Uzi', '2000', 'Fakultas Ilmu Komputer', 'Teknik Informatika', 'uzi.jpeg')
     """)
     print ("data berhasil ditambahkan")
     mydb.commit()
     
 else:
-    print ("table user sudah ada")
+    print ("table mhs sudah ada")
