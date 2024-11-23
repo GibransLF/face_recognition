@@ -5,18 +5,8 @@ mydb = mysql.connector.connect(
     host="localhost",
     user="root",
     password="",
-    database="ml",
+    database="fr_mhs",
 )
 
 print(mydb)
 mycursor = mydb.cursor()
-
-mycursor.execute("SELECT * FROM user")
-users = mycursor.fetchall()
-
-nama = []
-lahir = []
-jk = []
-gambar = []
-
-encoding = []
