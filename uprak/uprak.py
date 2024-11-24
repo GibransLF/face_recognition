@@ -40,20 +40,23 @@ while True:
         matches = face_recognition.compare_faces(encodings, face_encoding)
         face_distances = face_recognition.face_distance(encodings, face_encoding)
         
-        name = "Tidak diketahui"
-        age = "0"
-        gender = "Tidak diketahui"
+        name = "N/A"
+        age = "N/A"
+        fakultas = "N/A"
+        jurusan = "N/A"
         frame_color = (0, 0, 255)
+        confidence = 0
 
         if any(matches):
             best_match_index = np.argmin(face_distances)
-            
-            name = mhs_data[best_match_index]['nama_mhs']
-            current_year = datetime.now().year
-            age = current_year - mhs_data[best_match_index]['tahun_lahir']
-            fakultas = mhs_data[best_match_index]['fakultas']
-            jurusan = mhs_data[best_match_index]['jurusan']
-            frame_color = (0, 255, 0)
+            if face_distances[best_match_index] < 0.4: 
+                name = mhs_data[best_match_index]['nama_mhs']
+                current_year = datetime.now().year
+                age = current_year - mhs_data[best_match_index]['tahun_lahir']
+                fakultas = mhs_data[best_match_index]['fakultas']
+                jurusan = mhs_data[best_match_index]['jurusan']
+                frame_color = (0, 255, 0)
+                confidence = round((1 - face_distances[best_match_index]) * 100, 2)
 
         # Gambar kotak di sekitar wajah
         cv2.rectangle(frame, (left, top), (right, bottom), (frame_color), 2)
@@ -61,7 +64,8 @@ while True:
         # Tambahkaan Label
         cv2.putText(frame, fakultas, (left, top - 30), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
         cv2.putText(frame, jurusan, (left, top - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
-        labelBottom = f"{name}, {age} Tahun"
+        
+        labelBottom = f"{name}, {age} Tahun ({confidence}%)"
         cv2.putText(frame, labelBottom, (left, bottom + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
 
     # Tampilkan hasil
